@@ -1,324 +1,238 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Praveena Penumadi | React Developer & Frontend Engineer</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                            700: '#4338ca',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praveena Penumadi | Frontend Web Developer</title>
+<meta name="description" content="Praveena Penumadi is a frontend web developer in Hyderabad building React and TypeScript applications.">
+<style>
+  :root {
+    --bg: #f4efe6;
+    --panel: #fbf8f2;
+    --ink: #22201c;
+    --muted: #6b655b;
+    --line: #d9d1c3;
+    --accent: #b5472a;
+    --accent-ink: #8f3820;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1a1815;
+      --panel: #221f1b;
+      --ink: #f1ebe0;
+      --muted: #b3ab9c;
+      --line: #3a352d;
+      --accent: #e58a69;
+      --accent-ink: #f0a98f;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1a1815;
+    --panel: #221f1b;
+    --ink: #f1ebe0;
+    --muted: #b3ab9c;
+    --line: #3a352d;
+    --accent: #e58a69;
+    --accent-ink: #f0a98f;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.65;
+  }
+  a { color: var(--accent-ink); }
+  a:hover { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; margin: 0; line-height: 1.2; }
+  p { margin: 0; }
+  ul { margin: 0; padding: 0; }
+
+  .skip { position: absolute; left: -999px; top: 0; background: var(--ink); color: var(--bg); padding: .5rem 1rem; }
+  .skip:focus { left: 0; z-index: 10; }
+
+  .wrap { max-width: 56rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  header.top { border-bottom: 1px solid var(--line); }
+  header.top .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 2rem; padding-top: 1.1rem; padding-bottom: 1.1rem; }
+  .brand { font-family: Georgia, serif; font-size: 1.15rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+  nav { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; }
+  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; padding: .35rem 0; }
+  nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+  .hero { padding: 4rem 0 3.5rem; }
+  .hero .wrap { display: grid; grid-template-columns: 1fr 14rem; gap: 3rem; align-items: center; }
+  .eyebrow { color: var(--accent-ink); font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1rem; }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); margin-bottom: 1.25rem; }
+  .hero p.lead { color: var(--muted); font-size: 1.1rem; max-width: 34rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
+  .btn { display: inline-block; padding: .7rem 1.3rem; border-radius: 3px; text-decoration: none; font-weight: 600; font-size: .95rem; border: 1px solid var(--ink); }
+  .btn.primary { background: var(--ink); color: var(--bg); }
+  .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.ghost { color: var(--ink); }
+  .btn.ghost:hover { background: var(--panel); color: var(--ink); }
+  .photo { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 3px; border: 1px solid var(--line); background: var(--panel); }
+
+  section { padding: 3.25rem 0; border-top: 1px solid var(--line); }
+  section h2 { font-size: 1.7rem; margin-bottom: 1.75rem; }
+
+  .about p { max-width: 42rem; color: var(--muted); }
+  .about p + p { margin-top: 1rem; }
+
+  .role-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem 1rem; margin-bottom: .25rem; }
+  .role-head h3 { font-size: 1.25rem; }
+  .when { color: var(--muted); font-size: .92rem; }
+  .where { color: var(--muted); margin-bottom: 1rem; }
+  .duties { list-style: none; max-width: 44rem; }
+  .duties li { position: relative; padding-left: 1.1rem; margin-bottom: .6rem; }
+  .duties li::before { content: ""; position: absolute; left: 0; top: .78em; width: .45rem; height: 2px; background: var(--accent); }
+
+  .project { padding: 1.5rem 0; border-top: 1px solid var(--line); }
+  .project:first-of-type { border-top: 0; padding-top: 0; }
+  .project h3 { font-size: 1.25rem; margin-bottom: .35rem; }
+  .stack { color: var(--accent-ink); font-size: .88rem; margin-bottom: .7rem; }
+  .project p { max-width: 44rem; color: var(--muted); }
+  .project .links { margin-top: .75rem; font-size: .95rem; }
+
+  dl.skills { display: grid; grid-template-columns: 11rem 1fr; gap: .9rem 1.5rem; margin: 0; }
+  dl.skills dt { font-weight: 600; }
+  dl.skills dd { margin: 0; color: var(--muted); }
+
+  .contact p { color: var(--muted); max-width: 36rem; margin-bottom: 1.25rem; }
+  .contact ul { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem 2rem; }
+
+  footer { border-top: 1px solid var(--line); padding: 1.75rem 0; color: var(--muted); font-size: .9rem; }
+
+  @media (max-width: 720px) {
+    .hero .wrap { grid-template-columns: 1fr; gap: 2rem; }
+    .photo { max-width: 12rem; order: -1; }
+    dl.skills { grid-template-columns: 1fr; gap: .15rem; }
+    dl.skills dd { margin-bottom: .85rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased selection:bg-brand-500 selection:text-white">
+<body>
+<a class="skip" href="#main">Skip to content</a>
 
-    <!-- Navigation Bar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#home" class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-brand-500 animate-pulse"></span>
-                Praveena Penumadi
-            </a>
-            
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-                <a href="#about" class="hover:text-brand-500 transition-colors">About</a>
-                <a href="#experience" class="hover:text-brand-500 transition-colors">Experience</a>
-                <a href="#projects" class="hover:text-brand-500 transition-colors">Projects</a>
-                <a href="#skills" class="hover:text-brand-500 transition-colors">Skills</a>
-                <a href="#contact" class="hover:text-brand-500 transition-colors">Contact</a>
-            </nav>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Praveena Penumadi</a>
+    <nav aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-            <div class="flex items-center gap-3">
-                <a href="mailto:penumadipraveena.career@gmail.com" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold transition-all shadow-lg shadow-brand-500/25">
-                    Let's Connect
-                </a>
-                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-400 hover:text-white">
-                    <i class="fa-solid fa-bars text-xl"></i>
-                </button>
-            </div>
+<main id="main">
+  <div class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Frontend web developer · Hyderabad</p>
+        <h1>I build React interfaces for business software.</h1>
+        <p class="lead">I’m Praveena. For the last 1.8 years I’ve worked on an enterprise platform, building forms, tables and role screens with React and TypeScript, and fixing what breaks in production.</p>
+        <div class="actions">
+          <a class="btn primary" href="#projects">See my projects</a>
+          <a class="btn ghost" href="mailto:penumadipraveena.career@gmail.com">Email me</a>
         </div>
-        <!-- Mobile Nav Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-4 space-y-3">
-            <a href="#about" class="block text-slate-300 hover:text-white py-1">About</a>
-            <a href="#experience" class="block text-slate-300 hover:text-white py-1">Experience</a>
-            <a href="#projects" class="block text-slate-300 hover:text-white py-1">Projects</a>
-            <a href="#skills" class="block text-slate-300 hover:text-white py-1">Skills</a>
-            <a href="#contact" class="block text-slate-300 hover:text-white py-1">Contact</a>
-        </div>
-    </header>
+      </div>
+      <img class="photo" src="IMG-20260611-WA0002.jpg" alt="Portrait of Praveena Penumadi" onerror="this.style.display='none'">
+    </div>
+  </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-900/20 via-slate-950 to-slate-950 pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold uppercase tracking-wider">
-                        <i class="fa-solid fa-code"></i> React Developer & Frontend Engineer
-                    </div>
-                    <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
-                        Hi, I'm <span class="text-indigo-400">Praveena Penumadi</span>
-                    </h1>
-                    <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                        Frontend Software Engineer with nearly 2 years of professional experience building high-performance enterprise web applications using React, TypeScript, and modern UI architectures.
-                    </p>
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
-                        <a href="#projects" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold transition-all shadow-lg shadow-brand-500/20 flex items-center gap-2">
-                            <span>Explore Projects</span>
-                            <i class="fa-solid fa-arrow-down"></i>
-                        </a>
-                        <a href="mailto:penumadipraveena.career@gmail.com" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 font-semibold transition-all flex items-center gap-2">
-                            <i class="fa-regular fa-envelope text-brand-400"></i>
-                            <span>Email Me</span>
-                        </a>
-                        <a href="https://linkedin.com/in/praveenapenumadi" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 transition-all">
-                            <i class="fa-brands fa-linkedin-in text-lg text-brand-400"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="lg:col-span-5 flex justify-center">
-                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl overflow-hidden border-2 border-brand-500/30 shadow-2xl shadow-brand-500/10 bg-slate-900">
-                        <img src="IMG-20260611-WA0002.jpg" alt="Praveena Penumadi" class="w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section id="about" class="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <p>I’m a frontend developer who enjoys turning complicated configuration screens into something people can actually use. At work I build reusable components, dynamic forms with dependent fields, and data-heavy tables, and I connect them to REST APIs.</p>
+      <p>Outside work I built DocChat, a small app where you upload a document and ask it questions. I use AI coding tools to move faster on analysis and debugging, and I make sure I understand every line I ship.</p>
+    </div>
+  </section>
 
-    <!-- Professional Summary -->
-    <section id="about" class="py-20 border-t border-slate-900 bg-slate-950/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center space-y-4">
-                <h2 class="text-3xl font-bold text-white tracking-tight">Professional Summary</h2>
-                <p class="text-slate-400 text-base sm:text-lg leading-relaxed">
-                    React Developer with nearly 2 years of professional experience building and maintaining enterprise web applications using React, TypeScript, and JavaScript. Experienced in reusable UI components, dynamic forms, REST API integration, state management, role and permission workflows, report configuration, and production issue resolution. Contributed to Entity Builder, Role Management, Audit Logs, and Report Builder functionality in the Kagami application ecosystem. Also built a Java/Spring Boot Retrieval-Augmented Generation (RAG) application.
-                </p>
-            </div>
-        </div>
-    </section>
+  <section id="experience">
+    <div class="wrap">
+      <h2>Experience</h2>
+      <div class="role-head">
+        <h3>Associate Software Engineer, Prasaditya Idea Private Limited</h3>
+        <span class="when">March 2025 – Present</span>
+      </div>
+      <p class="where">Hyderabad, India · Kagami Studio and Kagami Runtime Web</p>
+      <ul class="duties">
+        <li>Build reusable React and TypeScript components, including dynamic forms, configuration panels, filters and data tables, with Ant Design, Material UI and SCSS.</li>
+        <li>Enhance Entity Builder for creating and editing entities, attributes, relationships, queries and configurations.</li>
+        <li>Develop Role Management and Role Hierarchy screens: role mapping, permission workflows, and a graph view built with React Flow and Dagre.</li>
+        <li>Implement the Audit Logs interface and its REST API integration across Entity Builder and Roles.</li>
+        <li>Enhance Report Builder and Editable Reports: data tables, filters, display rules, role mapping, scheduling, headers and Excel configuration.</li>
+        <li>Investigate and fix live issues in state synchronisation, async behaviour, API responses, rendering, date handling and table layouts.</li>
+        <li>Work in Git branches with teammates: commits, merges, rebasing and conflict resolution.</li>
+      </ul>
+    </div>
+  </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-20 border-t border-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <h2 class="text-3xl font-bold text-white tracking-tight">Professional Experience</h2>
-                <p class="text-slate-400">My journey building enterprise solutions.</p>
-            </div>
+  <section id="projects">
+    <div class="wrap">
+      <h2>Projects</h2>
 
-            <div class="max-w-4xl mx-auto">
-                <div class="relative pl-8 sm:pl-10 border-l-2 border-brand-500/30 space-y-12">
-                    <!-- Job Item -->
-                    <div class="relative">
-                        <div class="absolute -left-[41px] top-1.5 w-5 h-5 rounded-full bg-brand-600 border-4 border-slate-950"></div>
-                        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl">
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                                <div>
-                                    <h3 class="text-xl font-bold text-white">Associate Software Engineer</h3>
-                                    <p class="text-brand-400 font-medium">Prasaditya Idea Private Limited</p>
-                                </div>
-                                <span class="inline-flex items-center px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 text-xs font-semibold w-fit">
-                                    March 2025 - Present
-                                </span>
-                            </div>
-                            <p class="text-sm text-slate-400 mb-4"><i class="fa-solid fa-location-dot text-brand-400 mr-2"></i>Hyderabad, India</p>
-                            <ul class="space-y-3 text-sm text-slate-300">
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-check text-brand-400 mt-1"></i>
-                                    <span>Develop and maintain enterprise web application features across Kagami Studio and Kagami Runtime Web using React, TypeScript, JavaScript, Ant Design, Material UI, and SCSS.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-check text-brand-400 mt-1"></i>
-                                    <span>Build reusable React components and data-driven interfaces, including dynamic forms, configuration panels, filters, conditional UI behavior, and table-based screens.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-check text-brand-400 mt-1"></i>
-                                    <span>Enhance Entity Builder functionality for entity creation and editing, attributes, relationships, queries, and entity configurations.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-check text-brand-400 mt-1"></i>
-                                    <span>Contribute to Role Management and Role Hierarchy features, including role mapping, permission-related workflows, and graph-based visualization with React Flow and Dagre.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-check text-brand-400 mt-1"></i>
-                                    <span>Implement frontend functionality and API integration for Audit Logs across Entity Builder and Roles-related areas.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-check text-brand-400 mt-1"></i>
-                                    <span>Enhance Report Builder and Editable Reports, including data tables, filters, display rules, role mapping, scheduling, headers, and Excel-related configuration.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-check text-brand-400 mt-1"></i>
-                                    <span>Troubleshoot and resolve live application bugs involving state synchronization, asynchronous behavior, API responses, rendering, date handling, table layouts, and configuration screens.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <article class="project">
+        <h3>DocChat</h3>
+        <p class="stack">React · TypeScript · SCSS · Axios · Spring Boot API · LLM APIs</p>
+        <p>Upload a PDF, text or Markdown file, then ask questions about it. Answers stream in as they are written, and each one shows the passages it came from so you can check it. Includes upload progress, a document list, and clear error messages.</p>
+        <p class="links"><a href="https://github.com/praveena590/DocChat" target="_blank" rel="noopener noreferrer">View the code on GitHub</a></p>
+      </article>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 border-t border-slate-900 bg-slate-950/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <h2 class="text-3xl font-bold text-white tracking-tight">Featured Projects</h2>
-                <p class="text-slate-400">Key enterprise applications and modules I've built.</p>
-            </div>
+      <article class="project">
+        <h3>Kagami Studio and Runtime Web</h3>
+        <p class="stack">React · TypeScript · Ant Design · Material UI · Hookstate · AG Grid · React Flow · Axios</p>
+        <p>Enterprise application modules I contribute to: an entity builder, role management with a visual hierarchy, audit logs, and a report builder with editable reports. Company project, so there is no public code.</p>
+      </article>
+    </div>
+  </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Project 1 -->
-                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 flex flex-col justify-between hover:border-brand-500/50 transition-all">
-                    <div>
-                        <div class="flex items-center justify-between gap-4 mb-4">
-                            <h3 class="text-xl font-bold text-white">Kagami Studio & Runtime Web</h3>
-                            <span class="p-3 rounded-2xl bg-brand-500/10 text-brand-400"><i class="fa-solid fa-cubes text-xl"></i></span>
-                        </div>
-                        <p class="text-sm text-slate-400 mb-6 leading-relaxed">
-                            Enterprise application modules featuring advanced Entity Builder, Role Management with visual hierarchies via React Flow, Audit Logs, and comprehensive Report Builders.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-medium">React</span>
-                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-medium">TypeScript</span>
-                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-medium">Ant Design</span>
-                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-medium">React Flow</span>
-                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-medium">Hookstate</span>
-                        </div>
-                    </div>
-                </div>
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>Frontend</dt>
+        <dd>React, TypeScript, JavaScript (ES6+), HTML5, CSS3, SCSS, Tailwind CSS</dd>
+        <dt>UI libraries</dt>
+        <dd>Ant Design, Material UI, AG Grid, React Flow</dd>
+        <dt>State</dt>
+        <dd>React Hooks, Hookstate, Redux (fundamentals)</dd>
+        <dt>APIs</dt>
+        <dd>REST integration, Axios, form validation, error handling</dd>
+        <dt>Working practice</dt>
+        <dd>Git and GitHub, debugging and production support, Figma</dd>
+        <dt>Also</dt>
+        <dd>Java and Spring Boot (basics), RAG concepts, AI coding assistants</dd>
+      </dl>
+    </div>
+  </section>
 
-                <!-- Project 2 -->
-                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 flex flex-col justify-between hover:border-brand-500/50 transition-all">
-                    <div>
-                        <div class="flex items-center justify-between gap-4 mb-4">
-                            <h3 class="text-xl font-bold text-white">Spring Boot RAG Application</h3>
-                            <span class="p-3 rounded-2xl bg-brand-500/10 text-brand-400"><i class="fa-solid fa-brain text-xl"></i></span>
-                        </div>
-                        <p class="text-sm text-slate-400 mb-6 leading-relaxed">
-                            Retrieval-Augmented Generation system built in Java and Spring Boot integrating NVIDIA embedding and chat-completion APIs for contextual document search and intelligent Q&A.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-medium">Java</span>
-                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-medium">Spring Boot</span>
-                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-medium">Maven</span>
-                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-medium">RAG Pipeline</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p>I’m open to frontend and React roles. The quickest way to reach me is email.</p>
+      <ul>
+        <li><a href="mailto:penumadipraveena.career@gmail.com">penumadipraveena.career@gmail.com</a></li>
+        <li><a href="https://linkedin.com/in/praveenapenumadi" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://github.com/praveena590" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 border-t border-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <h2 class="text-3xl font-bold text-white tracking-tight">Technical Skills</h2>
-                <p class="text-slate-400">Technologies and tools I work with daily.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Skill Group -->
-                <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6">
-                    <h3 class="text-brand-400 font-semibold mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-code"></i> Frontend Core
-                    </h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">React</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">TypeScript</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">JavaScript (ES6+)</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">HTML5 / CSS3</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">SCSS / Tailwind CSS</span>
-                    </div>
-                </div>
-
-                <!-- Skill Group -->
-                <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6">
-                    <h3 class="text-brand-400 font-semibold mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-layer-group"></i> UI Libraries & State
-                    </h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">Ant Design</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">Material UI (MUI)</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">Hookstate</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">Redux fundamentals</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">React Flow</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">AG Grid</span>
-                    </div>
-                </div>
-
-                <!-- Skill Group -->
-                <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6">
-                    <h3 class="text-brand-400 font-semibold mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-server"></i> Backend & Tools
-                    </h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">Java / Spring Boot</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">REST APIs & Axios</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">Git & Version Control</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">Figma</span>
-                        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 text-sm">AI-Assisted Dev</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 border-t border-slate-900 bg-slate-950/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="max-w-2xl mx-auto space-y-6">
-                <h2 class="text-3xl font-bold text-white tracking-tight">Let's Work Together</h2>
-                <p class="text-slate-400 text-base">
-                    I'm actively looking for new opportunities and collaborations. Feel free to reach out via email or connect with me on LinkedIn!
-                </p>
-                <div class="flex flex-wrap justify-center gap-4 pt-4">
-                    <a href="mailto:penumadipraveena.career@gmail.com" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold transition-all shadow-lg shadow-brand-500/25 flex items-center gap-2">
-                        <i class="fa-regular fa-envelope"></i>
-                        <span>penumadipraveena.career@gmail.com</span>
-                    </a>
-                    <a href="https://linkedin.com/in/praveenapenumadi" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 font-semibold transition-all flex items-center gap-2">
-                        <i class="fa-brands fa-linkedin-in text-brand-400"></i>
-                        <span>LinkedIn Profile</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 border-t border-slate-900 text-center text-sm text-slate-500">
-        <p>&copy; 2026 Praveena Penumadi. Built with React principles & Tailwind CSS.</p>
-    </footer>
-
-    <!-- Mobile Menu Script -->
-    <script>
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-    </script>
+<footer>
+  <div class="wrap">© 2026 Praveena Penumadi</div>
+</footer>
 </body>
 </html>
